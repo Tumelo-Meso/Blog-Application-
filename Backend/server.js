@@ -1,7 +1,7 @@
-import express from "express"
-import dotenv from "dotenv"
 import cors from "cors";
-
+import dotenv from "dotenv";
+import express from "express";
+import authenticationRoutes from "./routes/authenticationRoutes.js";
 
 dotenv.config();
 
@@ -12,7 +12,7 @@ dotenv.config();
 const app = express();
 
 //Local PORT where is the server is hosted
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 9020;
 
 
 //Allow json format for the requests sent
@@ -32,6 +32,10 @@ app.get("/", (req,res)=>{
         res.status(200).json({message:"Successfully connected to the server"})
 })
 
+
+
+
+app.use("/authentication", authenticationRoutes);
 
 
 //Setting the server to listen to requests from the frontend

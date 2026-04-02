@@ -45,8 +45,10 @@ app-example
 
 #Ignore all environment variable files
 
-    *.env
+*.env
 
 #Ignore all node modules files
-    node_modules/
+node_modules/
 
+#Ignore test files
+*rest
