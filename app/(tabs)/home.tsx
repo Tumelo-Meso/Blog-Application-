@@ -3,8 +3,17 @@ import { Text, View } from 'react-native'
 
 const Home = () => {
   return (
-    <View>
+    <View style={{
+      marginTop:50,
+      marginLeft:20,
+      marginRight:20,
+    
+    }}>
+      <View>
       <Text>Home</Text>
+
+      </View>
+      
     </View>
   )
 }
