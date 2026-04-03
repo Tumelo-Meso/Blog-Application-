@@ -185,6 +185,7 @@ router.post("/email-verification", async (req, res)=>{
 
 })
 
+
 //Reset password endpoint
 router.post("/reset-password",async (req,res)=>{
 
