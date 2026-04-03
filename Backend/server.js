@@ -39,7 +39,7 @@ app.use("/authentication", authenticationRoutes);
 
 
 //Setting the server to listen to requests from the frontend
-app.listen(PORT, ()=>{
+app.listen(PORT, "0.0.0.0",()=>{
 
         console.log(`Server started at PORT ${PORT}`)
 })
