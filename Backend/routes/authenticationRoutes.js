@@ -1,6 +1,7 @@
 import bcrypt from "bcrypt";
 import express from "express";
 import jwt from "jsonwebtoken";
+import { sendEmailOTP } from "../src/email.js";
 import pool from "../src/sql.js";
 import { generateOTP, passwordStrength } from "../utilities/functions.js";
 
@@ -164,12 +165,14 @@ router.post("/email-verification", async (req, res)=>{
         }
 
         if(row.length>0  && requestType ==="register-email"){
-            return res.status(401).json({message:"Email account already exists, please login"})
+            return res.status(401).json({message:"Email account already exists, please login"});
         }
 
-        const OTP = generateOTP();
+        const OTP = generateOTP();  
 
-        res.status(200).json({message:"OTP has been sent to your email"})
+        sendEmailOTP(email,OTP);
+        
+        res.status(200).json({message:"OTP has been sent to your email"});
 
 
     } catch (error) {
@@ -181,7 +184,6 @@ router.post("/email-verification", async (req, res)=>{
     }
 
 })
-
 
 //Reset password endpoint
 router.post("/reset-password",async (req,res)=>{
