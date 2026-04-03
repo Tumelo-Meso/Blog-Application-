@@ -4,12 +4,8 @@ export default function RootLayout() {
   return (
   
   
-  <Stack
-  screenOptions={{
-    animation: 'slide_from_right',
-    gestureEnabled: true,
-  }}
-  >
+  <Stack>
+  
 
     <Stack.Screen name ="(tabs)" options={{headerShown:false}} />
   </Stack>
