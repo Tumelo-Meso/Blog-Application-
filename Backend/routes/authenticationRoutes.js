@@ -224,6 +224,46 @@ router.post("/reset-password",async (req,res)=>{
 
 })
 
+//OTP verification endpoint
+router.post("otp-verification", async(req,res)=>{
+
+    const {email,OTP} = req.body;
+
+    if(!emailTest.test(email) || !OTP){
+
+        return res.status(401).json({message:"Invalid request"})
+    }
+
+    try {
+        
+        const [row] = await pool.query("SELECT otp_hashed FROM otp_codes WHERE email=? LIMIT 1 ORDER BY date_created DESC");
+
+        if(row.length==0){
+            return res.status(401).json({message:"No valid OTP for this email"})
+        }
+
+        if(!bcrypt.compareSync(OTP, row[0].otp_hashed)){
+
+            return res.status(401).json({message:"Invalid OTP code"})
+        }
+
+
+        const [result] = await pool.query("DELETE FROM otp-codes WHERE email =? ",[email]);
+
+        if(result.affectedRows===0){
+            return res.status(401).json({message:"Could not delete otp code"})
+        }
+
+        return res.status(200).json({message:"OTP verification successful"})
+
+    } catch (error) {
+        console.error(error)
+        
+        return res.status(500).json({message:"Internal Server Error"})
+    }
+
+})
+
 
 
 export default router 
