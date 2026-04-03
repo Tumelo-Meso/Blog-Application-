@@ -9,6 +9,7 @@ import { Tabs } from "expo-router";
         tabBarInactiveTintColor: "#888",
         tabBarStyle: { backgroundColor: "#f2f2f2", height: 75 },
         tabBarLabelStyle: { fontSize: 13, fontWeight: "600" },
+        
       }}
         >
             
@@ -30,12 +31,26 @@ import { Tabs } from "expo-router";
             <Tabs.Screen name ="post"
             options={{
                 title: "Post",
-                tabBarIcon: ({color, size}) =>(
-                    <Ionicons name="add-outline" size={size} color={color} />
-                )
+                tabBarIcon: ({color}) =>(
+                    <Ionicons name="add-outline" size={30} color={color} />
+                ),
+                 
             }}
             
             />
+
+            <Tabs.Screen name ="account"
+            options={{
+                title: "Account",
+                tabBarIcon: ({color, size}) =>(
+                    <Ionicons name="person-outline" size={size} color={color} />
+                )
+                
+            }}
+            
+            
+            />
+
             <Tabs.Screen name ="settings"
             options={{
                 title: "Settings",
@@ -46,7 +61,10 @@ import { Tabs } from "expo-router";
             
             
             />
+
+            
         </Tabs>
+        
         
     )
  }
