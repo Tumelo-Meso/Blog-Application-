@@ -1,8 +1,8 @@
 import cors from "cors";
 import dotenv from "dotenv";
 import express from "express";
+import middleware from "./middleware/middleware.js";
 import authenticationRoutes from "./routes/authenticationRoutes.js";
-
 dotenv.config();
 
 /*Creating the app using express
@@ -25,11 +25,28 @@ app.use(express.json());
 app.use(cors()); 
 
 
-//Base endpoint of the server
-app.get("/", (req,res)=>{
+//Home page endpoint
+app.get("/",middleware, (req,res)=>{
 
-        //If the connection is successful a message and status will be sent back to the frontend
-        res.status(200).json({message:"Successfully connected to the server"})
+    const userId = req.userId;
+
+    
+    if(!userId){
+        return res.status(401).json({message:"Invalid request"})
+    }
+
+
+})
+
+
+//User account endpoint
+app.get("/account",middleware, (req,res)=>{
+
+    const userId = req.userId;
+
+    if(!userId){
+        return res.status(401).json({message:"Invalid request"})
+    }
 })
 
 
