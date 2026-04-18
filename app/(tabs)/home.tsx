@@ -1,18 +1,35 @@
 import React from "react";
-import { Text, View } from 'react-native';
+import { ScrollView, Text, View } from 'react-native';
 const Home = () => {
-
+let categories =["All","Technology","Business","Lifestyle","Health & Fitness","Education","Entertainment","News"];
   return (
     <View style={{
-      marginTop:50,
-      marginLeft:20,
-      marginRight:20,
+      marginTop:70,
+      marginLeft:3,
+      marginRight:3,
     
     }}>
-      <View>
-      <Text>Home</Text>
+      <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+        {
 
-      </View>
+          categories.map((cat, index) => {
+      return (
+          <View
+              key={index}
+               style={{
+              backgroundColor: "#ddd",
+              padding: 10,
+              borderRadius: 20,
+              marginRight: 10,
+                }}
+            >
+          <Text>{cat}</Text>
+          </View>
+            );
+          })
+
+        }
+     </ScrollView>
       
     </View>
   )

@@ -1,8 +1,10 @@
 import { LinearGradient } from 'expo-linear-gradient';
+import { useRouter } from "expo-router";
 import React from 'react';
 import { KeyboardAvoidingView, Platform, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 const login = () => {
+  const router = useRouter();
   return (
     <LinearGradient
       colors={['#B97E0D', '#B44233', '#08FF53']}
@@ -37,7 +39,9 @@ const login = () => {
         
 
         {/* Login Button */}
-        <TouchableOpacity style={styles.login}>
+        <TouchableOpacity style={styles.login}
+        onPress={() => router.push("/home")}
+        >
           <Text style={styles.loginText}>Log In</Text>
         </TouchableOpacity>
 
