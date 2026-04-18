@@ -1,9 +1,9 @@
-import * as SecureStore from "expo-secure-store";
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Text, View } from 'react-native';
 
 const account = () => {
 
+  /*
    //Ignore this for now 
   const basePoint:string = "http://172.16.6.115:9020";
   const [data , setData ] = useState([])
@@ -36,7 +36,7 @@ const account = () => {
 
   useEffect(()=>{ getAccountPage(); },[] )
 
-
+  */
   /*The data returned will be array , it contain the user's information which you can display on the account page 
 
     The data will include all their posts,bio,username, personal information etc
