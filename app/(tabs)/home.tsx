@@ -1,5 +1,5 @@
 import React from "react";
-import { ScrollView, Text, View } from 'react-native';
+import { Image, ScrollView, Text, View } from 'react-native';
 const Home = () => {
 let categories =["All","Technology","Business","Lifestyle","Health & Fitness","Education","Entertainment","News"];
   return (
@@ -9,6 +9,31 @@ let categories =["All","Technology","Business","Lifestyle","Health & Fitness","E
       marginRight:3,
     
     }}>
+      <View
+      style ={{
+        marginBottom:20,
+        flexDirection: "row"
+      }}
+      >
+        <Image
+      source={require("../../assets/images/AppIcon-1024.png")}
+      style={{
+      width: 24,
+      height: 24,
+      marginRight: 2,
+    }}
+      />
+        <Text
+      style = {{
+
+        fontSize:20,
+        fontWeight: "bold",
+        
+      }}
+      
+      >BlogApp</Text>
+      </View>
+      
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
         {
 
