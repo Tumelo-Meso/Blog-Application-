@@ -2,52 +2,54 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from "expo-router";
 import React from 'react';
 import { KeyboardAvoidingView, Platform, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
-
-const login = () => {
-  const router = useRouter();
+const accountDetails = () => {
+   const router = useRouter();
   return (
     <LinearGradient
-          colors={['#29D6BE', '#9B6FDD', '#193048']}
-          start={{ x: 0, y: 0 }}
-          end={{ x: 1, y: 1 }}
-          style={styles.container}
-        >
+      colors={['#29D6BE', '#9B6FDD', '#193048']}
+      start={{ x: 0, y: 0 }}
+      end={{ x: 1, y: 1 }}
+      style={styles.container}
+    >
       <KeyboardAvoidingView 
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'} 
         style={styles.innerContainer}
       >
         {/* Title and subtitle */}
         <View style={styles.titleContainer}>
-          
-          <Text style={styles.title}>Log in to your account</Text>
+          <Text style={styles.title}>Welcome to Blogger</Text>
+          <Text style={styles.subtitle}>Lets get your account started</Text>
         </View>
 
-        {/* Input fields */}
+        {/* Input field Username */}
         <TextInput
           style={styles.input}
-          placeholder="Email"
+          placeholder="UserName"
           placeholderTextColor="#666"
           keyboardType="email-address"
         />
-        
-        {/* Login Button */}
-        <TouchableOpacity style={styles.login}
-        onPress={() => router.push("/(registration)/loginPassword")}
+        <TextInput
+          style={styles.input}
+          placeholder="Password"
+          placeholderTextColor="#666"
+          secureTextEntry={true}
+        />
+
+        {/* Register Button */}
+        <TouchableOpacity style={styles.register}
+        onPress={() => router.push("/home")}
         >
-          <Text style={styles.loginText}>Next</Text>
+          <Text style={styles.registerText}>Register</Text>
         </TouchableOpacity>
 
-        {/* Bottom Text */}
+        {/* Bottom Text moved here, closer to button */}
         <TouchableOpacity style={styles.bottomTextContainer}
-        /*This is what links you to the next page*/
-        onPress={() => router.push("/signUp")}
+        onPress={() => router.push("/login")}
         >
-        <Text style={styles.bottomText}>Don’t have an account? Sign up</Text>
+          <Text style={styles.bottomText}>Already have an account? Log in</Text>
         </TouchableOpacity>
-
-        </KeyboardAvoidingView>
-
-        </LinearGradient>
+      </KeyboardAvoidingView>
+    </LinearGradient>
   );
 };
 
@@ -55,7 +57,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
-    justifyContent: 'center',
+    justifyContent: 'center', // center content vertically
   },
   innerContainer: {
     width: '100%',
@@ -81,22 +83,20 @@ const styles = StyleSheet.create({
     width: '100%',
     backgroundColor: 'rgba(255,255,255,0.9)',
     padding: 15,
-    marginBottom: 10,
+    marginBottom: 20,
     borderRadius: 12,
     fontSize: 16,
     color: '#000',
   },
-  
-  
-  login: {
+  register: {
     backgroundColor: '#007AFF',
     width: '100%',
     paddingVertical: 15,
     borderRadius: 12,
     alignItems: 'center',
-    marginBottom: 10,
+    marginBottom: 10, // less space so text is close
   },
-  loginText: {
+  registerText: {
     color: '#fff',
     fontWeight: 'bold',
     fontSize: 18,
@@ -105,10 +105,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   bottomText: {
-    paddingTop: 20,
+    paddingTop: 50,
     color: '#fff',
     fontSize: 15,
   },
 });
 
-export default login;
+export default accountDetails;

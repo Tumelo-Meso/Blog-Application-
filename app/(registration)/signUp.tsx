@@ -37,7 +37,7 @@ const SignUp = () => {
 
         {/* Register Button */}
         <TouchableOpacity style={styles.register}
-        onPress={() => router.push("/login")}
+        onPress={() => router.push("/accountDetails")}
         >
           <Text style={styles.registerText}>Register</Text>
         </TouchableOpacity>
