@@ -44,7 +44,7 @@ const SignUp = () => {
 
         {/* Bottom Text moved here, closer to button */}
         <TouchableOpacity style={styles.bottomTextContainer}
-        onPress={() => router.push("/home")}
+        onPress={() => router.push("/login")}
         >
           <Text style={styles.bottomText}>Already have an account? Log in</Text>
         </TouchableOpacity>

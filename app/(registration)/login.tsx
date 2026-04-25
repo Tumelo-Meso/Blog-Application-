@@ -7,19 +7,19 @@ const login = () => {
   const router = useRouter();
   return (
     <LinearGradient
-      colors={['#B97E0D', '#B44233', '#08FF53']}
-      start={{ x: 0, y: 0 }}
-      end={{ x: 1, y: 1 }}
-      style={styles.container}
-    >
+          colors={['#29D6BE', '#9B6FDD', '#193048']}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 1 }}
+          style={styles.container}
+        >
       <KeyboardAvoidingView 
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'} 
         style={styles.innerContainer}
       >
         {/* Title and subtitle */}
         <View style={styles.titleContainer}>
-          <Text style={styles.title}>Welcome Back</Text>
-          <Text style={styles.subtitle}>Log in to your account</Text>
+          
+          <Text style={styles.title}>Log in to your account</Text>
         </View>
 
         {/* Input fields */}
@@ -29,29 +29,23 @@ const login = () => {
           placeholderTextColor="#666"
           keyboardType="email-address"
         />
-        <TextInput
-          style={styles.input}
-          placeholder="Password"
-          placeholderTextColor="#666"
-          secureTextEntry={true}
-        />
+        
 
         
 
         {/* Login Button */}
         <TouchableOpacity style={styles.login}
-        onPress={() => router.push("/home")}
+        onPress={() => router.push("/(registration)/loginPassword")}
         >
-          <Text style={styles.loginText}>Log In</Text>
+          <Text style={styles.loginText}>Next</Text>
         </TouchableOpacity>
 
-        {/* Forgot Password link */}
-        <TouchableOpacity style={styles.forgotPasswordContainer}>
-          <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
-        </TouchableOpacity>
+        
 
         {/* Bottom Text */}
-        <TouchableOpacity style={styles.bottomTextContainer}>
+        <TouchableOpacity style={styles.bottomTextContainer}
+        onPress={() => router.push("/signUp")}
+        >
           <Text style={styles.bottomText}>Don’t have an account? Sign up</Text>
         </TouchableOpacity>
       </KeyboardAvoidingView>
@@ -94,19 +88,10 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#000',
   },
-  forgotPasswordContainer: {
-    width: '100%',
-    alignItems: 'center',
-    marginTop:20,
-    marginBottom: 3,
-  },
-  forgotPasswordText: {
-    color: '#fff',
-    fontSize: 14,
-    fontWeight: 'bold',
-  },
+  
+  
   login: {
-    backgroundColor: '#00ff80',
+    backgroundColor: '#007AFF',
     width: '100%',
     paddingVertical: 15,
     borderRadius: 12,
