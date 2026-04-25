@@ -1,9 +1,34 @@
+import * as ImagePicker from "expo-image-picker";
 import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from "expo-router";
-import React from 'react';
-import { KeyboardAvoidingView, Platform, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { default as React, useState } from 'react';
+import { Button, Image, KeyboardAvoidingView, Platform, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 const accountDetails = () => {
    const router = useRouter();
+   const [image,setImage] = useState<string| null>(null);
+   const pickImage = async () => {
+    // Ask permission
+    const permissionResult =
+      await ImagePicker.requestMediaLibraryPermissionsAsync();
+
+    if (!permissionResult.granted) {
+      alert("Permission required to access gallery");
+      return;
+    }
+
+    // Open image library
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [1, 1],
+      quality: 1,
+    });
+
+    if (!result.canceled) {
+      setImage(result.assets[0].uri);
+    }
+  };
+
   return (
     <LinearGradient
       colors={['#29D6BE', '#9B6FDD', '#193048']}
@@ -15,16 +40,32 @@ const accountDetails = () => {
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'} 
         style={styles.innerContainer}
       >
+
+        
+        
         {/* Title and subtitle */}
         <View style={styles.titleContainer}>
-          <Text style={styles.title}>Welcome to Blogger</Text>
-          <Text style={styles.subtitle}>Lets get your account started</Text>
+          <Text style={styles.title}>Let's get your account started</Text>
+          
         </View>
+        <Image
+        source={
+          image
+            ? { uri: image }
+          : require('../../assets/images/avatar.png')
+        }
+        style={styles.image}
+      />
+
+      {/* Button to pick image */}
+      <Button title="Choose Profile Picture" onPress={pickImage} 
+      
+      />
 
         {/* Input field Username */}
         <TextInput
           style={styles.input}
-          placeholder="UserName"
+          placeholder="Enter your Username"
           placeholderTextColor="#666"
           keyboardType="email-address"
         />
@@ -109,6 +150,12 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 15,
   },
+   image: {
+    width: 120,
+    height: 120,
+    borderRadius: 60,
+    marginBottom: 10,
+  }
 });
 
 export default accountDetails;
