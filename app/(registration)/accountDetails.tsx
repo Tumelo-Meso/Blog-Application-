@@ -2,7 +2,7 @@ import * as ImagePicker from "expo-image-picker";
 import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from "expo-router";
 import { default as React, useState } from 'react';
-import { Button, Image, KeyboardAvoidingView, Platform, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Image, KeyboardAvoidingView, Platform, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 const accountDetails = () => {
    const router = useRouter();
    const [image,setImage] = useState<string| null>(null);
@@ -48,7 +48,11 @@ const accountDetails = () => {
           <Text style={styles.title}>Let's get your account started</Text>
           
         </View>
-        <Image
+        
+
+      {/* Button to pick image */}
+      <TouchableOpacity style={styles.ImageSection} onPress={pickImage}>
+      <Image
         source={
           image
             ? { uri: image }
@@ -56,24 +60,36 @@ const accountDetails = () => {
         }
         style={styles.image}
       />
+        <Text style ={{fontSize:18, fontWeight:'bold'}}>
+           {image ? "Change Profile Picture" : "Choose Profile Picture"}
+        </Text>
+      </TouchableOpacity>
 
-      {/* Button to pick image */}
-      <Button title="Choose Profile Picture" onPress={pickImage} 
-      
-      />
+        
+        {/* Input field Display Name */}
+        <Text style = {styles.text}>Display name</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Enter the name that wil be displayed"
+          placeholderTextColor="#666"
+          keyboardType="email-address"
+          multiline={true}
+        />
 
         {/* Input field Username */}
+        <Text style = {styles.text}>Username</Text>
         <TextInput
           style={styles.input}
           placeholder="Enter your Username"
           placeholderTextColor="#666"
-          keyboardType="email-address"
+          multiline={true}
         />
+        <Text style = {styles.text}>Bio</Text>
         <TextInput
-          style={styles.input}
-          placeholder="Password"
+          style={[styles.input,styles.bio]}
+          placeholder="Enter your bio"
           placeholderTextColor="#666"
-          secureTextEntry={true}
+          multiline = {true}
         />
 
         {/* Register Button */}
@@ -95,10 +111,30 @@ const accountDetails = () => {
 };
 
 const styles = StyleSheet.create({
+  text :{
+
+  width: '100%',
+  textAlign: 'left',
+  fontWeight: 'bold',
+  fontSize:17
+  },
   container: {
     flex: 1,
     padding: 20,
     justifyContent: 'center', // center content vertically
+  },
+  bio: {
+  
+    width: '100%',
+    backgroundColor: 'rgba(255,255,255,0.9)',
+    
+    marginBottom: 20,
+    borderRadius: 12,
+    fontSize: 16,
+    color: '#000',
+    marginTop: 10,
+    height:100,
+    textAlignVertical: "top"
   },
   innerContainer: {
     width: '100%',
@@ -128,6 +164,7 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     fontSize: 16,
     color: '#000',
+    marginTop: 10
   },
   register: {
     backgroundColor: '#007AFF',
@@ -151,10 +188,19 @@ const styles = StyleSheet.create({
     fontSize: 15,
   },
    image: {
-    width: 120,
-    height: 120,
-    borderRadius: 60,
+    width: 170,
+    height: 170,
+    borderRadius: 91,
     marginBottom: 10,
+  },
+
+  ImageSection: {
+  alignItems: 'center',
+  marginVertical: 20,
+  padding: 20,
+  width:'100%',
+  borderRadius: 20,
+  backgroundColor: 'rgba(255,255,255,0.1)',
   }
 });
 
