@@ -1,5 +1,6 @@
 import React from "react";
 import { Image, ScrollView, Text, View } from 'react-native';
+import BlogPost from "../(features)/blogPost";
 const Home = () => {
 let categories =["All","Technology","Business","Lifestyle","Health & Fitness","Education","Entertainment","News"];
   return (
@@ -55,6 +56,12 @@ let categories =["All","Technology","Business","Lifestyle","Health & Fitness","E
 
         }
      </ScrollView>
+
+     <View>
+      <BlogPost />
+      <BlogPost />
+      <BlogPost />
+    </View>
       
     </View>
   )
