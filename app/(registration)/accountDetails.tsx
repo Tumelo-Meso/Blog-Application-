@@ -1,30 +1,42 @@
 import * as ImagePicker from "expo-image-picker";
 import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from "expo-router";
-import { default as React, useState } from 'react';
+import React, { useState } from 'react';
 import { Image, KeyboardAvoidingView, Platform, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { registrationStyles } from "../styles/Registration";
+
 const accountDetails = () => {
-   const router = useRouter();
-   const [image,setImage] = useState<string| null>(null);
-   const pickImage = async () => {
-    // Ask permission
+
+  // Navigation hook (used to move between screens)
+  const router = useRouter();
+
+  // Stores selected profile image URI (null = no image selected yet)
+  const [image, setImage] = useState<string | null>(null);
+
+  /**
+   * Opens device image library and allows user to pick a profile picture
+   */
+  const pickImage = async () => {
+
+    // Request permission to access media library
     const permissionResult =
       await ImagePicker.requestMediaLibraryPermissionsAsync();
 
+    // If permission is denied, stop function
     if (!permissionResult.granted) {
       alert("Permission required to access gallery");
       return;
     }
 
-    // Open image library
+    // Open image picker
     const result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      allowsEditing: true,
-      aspect: [1, 1],
-      quality: 1,
+      mediaTypes: ImagePicker.MediaTypeOptions.Images, // only images allowed
+      allowsEditing: true, // user can crop image
+      aspect: [1, 1], // square crop (profile picture style)
+      quality: 1, // highest quality
     });
 
+    // If user did not cancel selection, save image URI
     if (!result.canceled) {
       setImage(result.assets[0].uri);
     }
@@ -37,80 +49,90 @@ const accountDetails = () => {
       end={{ x: 1, y: 1 }}
       style={registrationStyles.container}
     >
-      <KeyboardAvoidingView 
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'} 
+
+      {/* Prevents keyboard from overlapping inputs */}
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         style={registrationStyles.innerContainer}
       >
 
-        
-        
-        {/* Title and subtitle */}
+        {/* Screen title section */}
         <View style={registrationStyles.titleContainer}>
-          <Text style={registrationStyles.title}>Let's get your account started</Text>
-          
+          <Text style={registrationStyles.title}>
+            Let's get your account started
+          </Text>
         </View>
-        
 
-      {/* Button to pick image */}
-      <TouchableOpacity style={registrationStyles.ImageSection} onPress={pickImage}>
-      <Image
-        source={
-          image
-            ? { uri: image }
-          : require('../../assets/images/avatar.png')
-        }
-        style={registrationStyles.image}
-      />
-        <Text style ={{fontSize:18, fontWeight:'bold'}}>
-           {image ? "Change Profile Picture" : "Choose Profile Picture"}
-        </Text>
-      </TouchableOpacity>
+        {/* Profile image picker section */}
+        <TouchableOpacity
+          style={registrationStyles.ImageSection}
+          onPress={pickImage}
+        >
+          <Image
+            source={
+              image
+                ? { uri: image } // user selected image
+                : require('../../assets/images/avatar.png') // default avatar
+            }
+            style={registrationStyles.image}
+          />
 
-        
-        {/* Input field Display Name */}
-        <Text style = {registrationStyles.text}>Display name </Text>
+          {/* Dynamic button text depending on image state */}
+          <Text style={{ fontSize: 18, fontWeight: 'bold' }}>
+            {image ? "Change Profile Picture" : "Choose Profile Picture"}
+          </Text>
+        </TouchableOpacity>
+
+        {/* Display Name input */}
+        <Text style={registrationStyles.text}>Display name</Text>
         <TextInput
           style={registrationStyles.input}
-          placeholder="Enter the name that wil be displayed"
+          placeholder="Enter the name that will be displayed"
           placeholderTextColor="#666"
-          keyboardType="email-address"
           multiline={true}
         />
 
-        {/* Input field Username */}
-        <Text style = {registrationStyles.text}>Username</Text>
+        {/* Username input */}
+        <Text style={registrationStyles.text}>Username</Text>
         <TextInput
           style={registrationStyles.input}
           placeholder="Enter your Username"
           placeholderTextColor="#666"
           multiline={true}
         />
-        <Text style = {registrationStyles.text}>Bio</Text>
+
+        {/* Bio input */}
+        <Text style={registrationStyles.text}>Bio</Text>
         <TextInput
-          style={[registrationStyles.input,registrationStyles.bio]}
+          style={[registrationStyles.input, registrationStyles.bio]}
           placeholder="Enter your bio"
           placeholderTextColor="#666"
-          multiline = {true}
+          multiline={true}
         />
 
-        {/* Register Button */}
-        <TouchableOpacity style={registrationStyles.register}
-        onPress={() => router.push("/home")}
+        {/* Submit / continue button */}
+        <TouchableOpacity
+          style={registrationStyles.register}
+          onPress={() => router.push("/home")}
         >
-          <Text style={registrationStyles.registerText}>Start Blogging</Text>
+          <Text style={registrationStyles.registerText}>
+            Start Blogging
+          </Text>
         </TouchableOpacity>
 
-        {/* Bottom Text moved here, closer to button */}
-        <TouchableOpacity style={registrationStyles.bottomTextContainer}
-        onPress={() => router.push("/login")}
+        {/* Login redirect link */}
+        <TouchableOpacity
+          style={registrationStyles.bottomTextContainer}
+          onPress={() => router.push("/login")}
         >
-          <Text style={registrationStyles.bottomText}>Already have an account? Log in</Text>
+          <Text style={registrationStyles.bottomText}>
+            Already have an account? Log in
+          </Text>
         </TouchableOpacity>
+
       </KeyboardAvoidingView>
     </LinearGradient>
   );
 };
-
-
 
 export default accountDetails;

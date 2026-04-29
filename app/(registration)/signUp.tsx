@@ -3,8 +3,12 @@ import { useRouter } from "expo-router";
 import React, { useState } from 'react';
 import { KeyboardAvoidingView, Platform, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { registrationStyles } from "../styles/Registration";
+
 const SignUp = () => {
+  {/*This use router is declaration for the navigation */}
    const router = useRouter();
+
+   {/*The code below is used for checking whete email or password inputs are empty */}
    const [email,setEmail] = useState('');
    const [password,setPassword] = useState('');
 

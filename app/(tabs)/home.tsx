@@ -59,8 +59,7 @@ let categories =["All","Technology","Business","Lifestyle","Health & Fitness","E
 
      <View>
       <BlogPost />
-      <BlogPost />
-      <BlogPost />
+      
     </View>
       
     </View>
