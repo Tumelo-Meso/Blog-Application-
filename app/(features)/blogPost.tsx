@@ -1,22 +1,23 @@
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+// BLOG POST COMPONENT
+
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import React from "react";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 function BlogPost() {
   return (
     <View style={styles.mainbox}>
-
-      {/* LEFT SIDE - CONTENT */}
+      {/* LEFT SIDE */}
       <View style={styles.content}>
         <Text style={styles.title}>Blog Title</Text>
+
         <Text style={styles.subtitle}>
           This is a short preview of the blog post content...
         </Text>
       </View>
 
-      {/* RIGHT SIDE - ICONS ONLY */}
+      {/* RIGHT SIDE */}
       <View style={styles.reactions}>
-
         {/* LIKE */}
         <TouchableOpacity style={styles.iconBox}>
           <MaterialCommunityIcons
@@ -24,6 +25,7 @@ function BlogPost() {
             size={22}
             color="#555"
           />
+
           <Text style={styles.count}>12</Text>
         </TouchableOpacity>
 
@@ -34,6 +36,7 @@ function BlogPost() {
             size={22}
             color="#555"
           />
+
           <Text style={styles.count}>2</Text>
         </TouchableOpacity>
 
@@ -44,6 +47,7 @@ function BlogPost() {
             size={22}
             color="#555"
           />
+
           <Text style={styles.count}>5</Text>
         </TouchableOpacity>
 
@@ -55,66 +59,64 @@ function BlogPost() {
             color="#555"
           />
         </TouchableOpacity>
-
       </View>
-
     </View>
   );
 }
 
-const styles = StyleSheet.create({
+export default BlogPost;
 
+const styles = StyleSheet.create({
   // MAIN CARD
   mainbox: {
     height: 200,
-    marginHorizontal: 12,
-    marginTop: 20,
+    width: "100%",
+    marginTop: 16,
+
     borderRadius: 12,
-    flexDirection: 'row',
-    overflow: 'hidden',
-    backgroundColor: '#fff',
+    flexDirection: "row",
+    overflow: "hidden",
+
+    backgroundColor: "#fff",
 
     borderWidth: 1,
-    borderColor: '#E5E5E5',
+    borderColor: "#E5E5E5",
   },
 
-  // LEFT SIDE CONTENT
+  // LEFT CONTENT
   content: {
     flex: 7,
-    backgroundColor: '#F5F5F5',
+    backgroundColor: "#F5F5F5",
     padding: 15,
-    
   },
 
   title: {
     fontSize: 16,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 6,
   },
 
   subtitle: {
     fontSize: 12,
-    color: '#555',
+    color: "#555",
   },
 
-  // RIGHT SIDE ICON PANEL
+  // RIGHT PANEL
   reactions: {
     flex: 3,
-    backgroundColor: '#FAFAFA',
-    justifyContent: 'space-evenly',
-    alignItems: 'center',
+    backgroundColor: "#FAFAFA",
+
+    justifyContent: "space-evenly",
+    alignItems: "center",
   },
 
   iconBox: {
-    alignItems: 'center',
+    alignItems: "center",
   },
 
   count: {
     fontSize: 12,
     marginTop: 2,
-    fontWeight: '600',
+    fontWeight: "600",
   },
-
 });
-
-export default BlogPost;

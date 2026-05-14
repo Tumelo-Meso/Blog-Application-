@@ -5,6 +5,9 @@ import { KeyboardAvoidingView, Platform, Text, TextInput, TouchableOpacity, View
 import { registrationStyles } from "../styles/Registration";
 
 const SignUp = () => {
+
+  
+
   {/*This use router is declaration for the navigation */}
    const router = useRouter();
 
@@ -30,7 +33,7 @@ const SignUp = () => {
 
   return (
     <LinearGradient
-      colors={['#29D6BE', '#9B6FDD', '#193048']}
+      colors={['#020024', '#090979', '#00D4FF']}
       start={{ x: 0, y: 0 }}
       end={{ x: 1, y: 1 }}
       style={registrationStyles.container}
@@ -46,24 +49,24 @@ const SignUp = () => {
         </View>
 
         {/* Input field for EMAIL */}
-        <Text style = {[registrationStyles.text,isemail&&{color: 'red'}]}>Enter email address</Text>
+        
         <TextInput
         value = {email}
         onChangeText={setEmail}
           style={[registrationStyles.input, isemail&&{borderColor:'red', borderWidth: 4}]}
           placeholder="Email"
-          placeholderTextColor="#666"
+          placeholderTextColor="#ffffff"
           keyboardType="email-address"
         />
 
         {/* Input field for passwword */}
-        <Text style = {[registrationStyles.text, ispassword&&{color: 'red'}]}>Enter password</Text>
+        
         <TextInput
         value ={password}
         onChangeText={setPassword}
           style={[registrationStyles.input, , ispassword&&{borderColor:'red', borderWidth: 4}]}
           placeholder="Password"
-          placeholderTextColor="#666"
+          placeholderTextColor="#ffffff"
           secureTextEntry={true}
         />
 

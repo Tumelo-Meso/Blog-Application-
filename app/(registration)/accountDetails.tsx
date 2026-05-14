@@ -44,7 +44,7 @@ const accountDetails = () => {
 
   return (
     <LinearGradient
-      colors={['#29D6BE', '#9B6FDD', '#193048']}
+      colors={['#020024', '#090979', '#00D4FF']}
       start={{ x: 0, y: 0 }}
       end={{ x: 1, y: 1 }}
       style={registrationStyles.container}
@@ -78,7 +78,7 @@ const accountDetails = () => {
           />
 
           {/* Dynamic button text depending on image state */}
-          <Text style={{ fontSize: 18, fontWeight: 'bold' }}>
+          <Text style={{ fontSize: 18,color:"#ffffff", fontWeight: 'bold' }}>
             {image ? "Change Profile Picture" : "Choose Profile Picture"}
           </Text>
         </TouchableOpacity>
@@ -88,7 +88,7 @@ const accountDetails = () => {
         <TextInput
           style={registrationStyles.input}
           placeholder="Enter the name that will be displayed"
-          placeholderTextColor="#666"
+          placeholderTextColor="#ffffff"
           multiline={true}
         />
 
@@ -97,7 +97,7 @@ const accountDetails = () => {
         <TextInput
           style={registrationStyles.input}
           placeholder="Enter your Username"
-          placeholderTextColor="#666"
+          placeholderTextColor="#fffcfc"
           multiline={true}
         />
 
@@ -106,7 +106,7 @@ const accountDetails = () => {
         <TextInput
           style={[registrationStyles.input, registrationStyles.bio]}
           placeholder="Enter your bio"
-          placeholderTextColor="#666"
+          placeholderTextColor="#ffffff"
           multiline={true}
         />
 

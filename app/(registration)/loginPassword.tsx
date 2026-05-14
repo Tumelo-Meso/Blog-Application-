@@ -2,6 +2,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from "expo-router";
 import React from 'react';
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { registrationStyles } from "../styles/Registration";
 function loginPassword() {
     const router = useRouter();
   return (
@@ -18,7 +19,7 @@ function loginPassword() {
                           <Text style={styles.title}>Enter password </Text>
                         </View>
         <TextInput
-                  style={styles.input}
+                  style={registrationStyles.input}
                   placeholder="Password"
                   placeholderTextColor="#666"
                   secureTextEntry={true}
@@ -32,7 +33,9 @@ function loginPassword() {
 
 
         {/* Forgot Password link */}
-                <TouchableOpacity style={styles.forgotPasswordContainer}>
+                <TouchableOpacity 
+                onPress={() => router.push("/forgotPassword")}
+                style={styles.forgotPasswordContainer}>
                   <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
                 </TouchableOpacity>
 

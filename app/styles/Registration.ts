@@ -39,14 +39,16 @@ text :{
   },
 
   input: {
-    width: '100%',
-    backgroundColor: 'rgba(255,255,255,0.9)',
-    padding: 15,
-    marginTop:10,
-    marginBottom: 20,
-    borderRadius: 12,
-    fontSize: 16,
-    color: '#000',
+    width: "100%",
+    backgroundColor: "rgba(255,255,255,0.18)",
+    paddingVertical: 14,
+    paddingHorizontal: 15,
+    borderRadius: 14,
+    fontSize: 15,
+    color: "#fff",
+    marginBottom: 15,
+    borderWidth: 1,
+    borderColor: "rgba(255,255,255,0.25)",
   },
 
   register: {

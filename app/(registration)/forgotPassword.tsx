@@ -1,19 +1,20 @@
 import { LinearGradient } from "expo-linear-gradient";
 import { useRouter } from "expo-router";
-import React from "react";
+import React, { useState } from "react";
 import {
-  KeyboardAvoidingView,
-  Platform,
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
+    KeyboardAvoidingView,
+    Platform,
+    StyleSheet,
+    Text,
+    TextInput,
+    TouchableOpacity,
+    View,
 } from "react-native";
 import { registrationStyles } from "../styles/Registration";
 
-export default function Login() {
+export default function ForgotPassword() {
   const router = useRouter();
+  const [code, setCode] = useState("");
 
   return (
     <LinearGradient
@@ -25,33 +26,33 @@ export default function Login() {
         style={styles.container}
       >
         <View style={styles.content}>
-
-          {/* More text added here */}
-          <Text style={styles.title}>Welcome Back</Text>
+          <Text style={styles.title}>Reset Password</Text>
 
           <Text style={styles.subtitle}>
-            Enter your email address to continue to your account
+            Enter the verification code sent to your email
           </Text>
 
           <TextInput
-            placeholder="Email address"
+            placeholder="Enter verification code"
             placeholderTextColor="rgba(255,255,255,0.7)"
             style={registrationStyles.input}
+            value={code}
+            onChangeText={setCode}
+            keyboardType="number-pad"
           />
 
           <TouchableOpacity
             style={registrationStyles.register}
-            onPress={() => router.push("/(registration)/loginPassword")}
+            onPress={() => router.push("/newPassword")}
           >
-            <Text style={styles.buttonText}>Continue</Text>
+            <Text style={styles.buttonText}>Verify Code</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={() => router.push("/signUp")}>
+          <TouchableOpacity onPress={() => router.push("/forgotPassword")}>
             <Text style={styles.link}>
-              Don’t have an account yet? Sign up here
+              Didn’t receive a code? Try again
             </Text>
           </TouchableOpacity>
-
         </View>
       </KeyboardAvoidingView>
     </LinearGradient>
@@ -82,26 +83,6 @@ const styles = StyleSheet.create({
     color: "#eaeaea",
     textAlign: "center",
     marginBottom: 25,
-  },
-
-  input: {
-    width: "100%",
-    backgroundColor: "rgba(255,255,255,0.18)",
-    paddingVertical: 14,
-    paddingHorizontal: 15,
-    borderRadius: 14,
-    fontSize: 15,
-    color: "#fff",
-    marginBottom: 15,
-    borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.25)",
-  },
-
-  button: {
-    backgroundColor: "#000",
-    padding: 14,
-    borderRadius: 12,
-    alignItems: "center",
   },
 
   buttonText: {

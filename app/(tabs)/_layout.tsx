@@ -9,7 +9,8 @@ import { Tabs } from "expo-router";
         tabBarInactiveTintColor: "#888",
         tabBarStyle: { backgroundColor: "#f2f2f2", height: 75 },
         tabBarLabelStyle: { fontSize: 13, fontWeight: "600" },
-        headerShown: false
+        headerShown: false,
+       
         
       }}
         >
