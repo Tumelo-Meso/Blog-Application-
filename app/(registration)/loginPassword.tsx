@@ -1,107 +1,117 @@
-import { LinearGradient } from 'expo-linear-gradient';
+import { LinearGradient } from "expo-linear-gradient";
 import { useRouter } from "expo-router";
-import React from 'react';
-import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import React from "react";
+import {
+  KeyboardAvoidingView,
+  Platform,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { registrationStyles } from "../styles/Registration";
-function loginPassword() {
-    const router = useRouter();
+
+function LoginPassword() {
+  const router = useRouter();
+
   return (
     <LinearGradient
-              colors={['#29D6BE', '#9B6FDD', '#193048']}
-              start={{ x: 0, y: 0 }}
-              end={{ x: 1, y: 1 }}
-              style={styles.container}
+      colors={["#020024", "#090979", "#00D4FF"]}
+      style={styles.container}
+    >
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={styles.container}
+      >
+        <View style={styles.content}>
+          
+
+          <Text style={styles.title}>Create Your Password</Text>
+
+          <Text style={styles.subtitle}>
+            Choose a secure password to protect your Blogger account.
+          </Text>
+
+          <View style={styles.formCard}>
+            <TextInput
+              style={registrationStyles.input}
+              placeholder="Enter password"
+              placeholderTextColor="rgba(255,255,255,0.7)"
+              secureTextEntry={true}
+            />
+
+            <TextInput
+              style={registrationStyles.input}
+              placeholder="Confirm password"
+              placeholderTextColor="rgba(255,255,255,0.7)"
+              secureTextEntry={true}
+            />
+
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => router.push("/accountDetails")}
             >
-                
-                        {/* Title and subtitle */}
-                        <View style={styles.titleContainer}>
-                          
-                          <Text style={styles.title}>Enter password </Text>
-                        </View>
-        <TextInput
-                  style={registrationStyles.input}
-                  placeholder="Password"
-                  placeholderTextColor="#666"
-                  secureTextEntry={true}
-                />
-
-                <TouchableOpacity style={styles.login}
-                        onPress={() => router.push("/home")}
-                        >
-                          <Text style={styles.loginText}>Next</Text>
-                        </TouchableOpacity>
-
-
-        {/* Forgot Password link */}
-                <TouchableOpacity 
-                onPress={() => router.push("/forgotPassword")}
-                style={styles.forgotPasswordContainer}>
-                  <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
-                </TouchableOpacity>
-
+              <Text style={styles.buttonText}>Continue</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </KeyboardAvoidingView>
     </LinearGradient>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
-container: {
+  container: {
     flex: 1,
-    padding: 20,
-    justifyContent: 'center',
   },
-  innerContainer: {
-    width: '100%',
-    alignItems: 'center',
+
+  content: {
+    flex: 1,
+    justifyContent: "center",
+    paddingHorizontal: 24,
   },
-  titleContainer: {
-    width: '100%',
-    marginBottom: 30,
-  },
+
+  
+
   title: {
-    fontSize: 28,
-    fontWeight: 'bold',
-    color: '#fff',
-    marginBottom: 5,
-    textAlign: 'left',
-  },
-input: {
-    width: '100%',
-    backgroundColor: 'rgba(255,255,255,0.9)',
-    padding: 15,
-    marginBottom: 20,
-    borderRadius: 12,
-    fontSize: 16,
-    color: '#000',
+    fontSize: 50,
+    fontWeight: "bold",
+    color: "#fff",
+    textAlign: "center",
+    marginBottom: 12,
   },
 
-  forgotPasswordContainer: {
-    width: '100%',
-    alignItems: 'center',
-    marginTop:20,
-    marginBottom: 3,
+  subtitle: {
+    fontSize: 20,
+    color: "#eaeaea",
+    textAlign: "center",
+    marginBottom: 35,
+    lineHeight: 28,
+    paddingHorizontal: 12,
   },
 
-  forgotPasswordText: {
-    color: '#fff',
-    fontSize: 14,
-    fontWeight: 'bold',
+  formCard: {
+    backgroundColor: "rgba(255,255,255,0.12)",
+    borderRadius: 20,
+    padding: 20,
+    borderWidth: 1,
+    borderColor: "rgba(255,255,255,0.18)",
   },
 
-  login: {
-    backgroundColor: '#007AFF',
-    width: '100%',
-    paddingVertical: 15,
-    borderRadius: 12,
-    alignItems: 'center',
-    marginBottom: 10,
-  },
-  loginText: {
-    color: '#fff',
-    fontWeight: 'bold',
-    fontSize: 18,
+  button: {
+    backgroundColor: "#1E1E2E",
+    paddingVertical: 18,
+    borderRadius: 14,
+    alignItems: "center",
+    marginTop: 12,
   },
 
-
+  buttonText: {
+    color: "#fff",
+    fontWeight: "700",
+    fontSize: 20,
+  },
 });
 
-export default loginPassword
+export default LoginPassword;

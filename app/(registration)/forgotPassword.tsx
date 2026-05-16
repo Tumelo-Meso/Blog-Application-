@@ -2,13 +2,13 @@ import { LinearGradient } from "expo-linear-gradient";
 import { useRouter } from "expo-router";
 import React, { useState } from "react";
 import {
-    KeyboardAvoidingView,
-    Platform,
-    StyleSheet,
-    Text,
-    TextInput,
-    TouchableOpacity,
-    View,
+  KeyboardAvoidingView,
+  Platform,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
 } from "react-native";
 import { registrationStyles } from "../styles/Registration";
 
@@ -18,7 +18,7 @@ export default function ForgotPassword() {
 
   return (
     <LinearGradient
-      colors={["#29D6BE", "#9B6FDD", "#193048"]}
+      colors={["#020024", "#090979", "#00D4FF"]}
       style={styles.container}
     >
       <KeyboardAvoidingView
@@ -26,27 +26,31 @@ export default function ForgotPassword() {
         style={styles.container}
       >
         <View style={styles.content}>
+          
+
           <Text style={styles.title}>Reset Password</Text>
 
           <Text style={styles.subtitle}>
-            Enter the verification code sent to your email
+            Enter the verification code sent to your email to continue.
           </Text>
 
-          <TextInput
-            placeholder="Enter verification code"
-            placeholderTextColor="rgba(255,255,255,0.7)"
-            style={registrationStyles.input}
-            value={code}
-            onChangeText={setCode}
-            keyboardType="number-pad"
-          />
+          <View style={styles.formCard}>
+            <TextInput
+              placeholder="Enter verification code"
+              placeholderTextColor="rgba(255,255,255,0.7)"
+              style={registrationStyles.input}
+              value={code}
+              onChangeText={setCode}
+              keyboardType="number-pad"
+            />
 
-          <TouchableOpacity
-            style={registrationStyles.register}
-            onPress={() => router.push("/newPassword")}
-          >
-            <Text style={styles.buttonText}>Verify Code</Text>
-          </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => router.push("/newPassword")}
+            >
+              <Text style={styles.buttonText}>Verify Code</Text>
+            </TouchableOpacity>
+          </View>
 
           <TouchableOpacity onPress={() => router.push("/forgotPassword")}>
             <Text style={styles.link}>
@@ -67,32 +71,56 @@ const styles = StyleSheet.create({
   content: {
     flex: 1,
     justifyContent: "center",
-    paddingHorizontal: 20,
+    paddingHorizontal: 24,
   },
 
+  
+
   title: {
-    fontSize: 30,
+    fontSize: 52,
     fontWeight: "bold",
     color: "#fff",
     textAlign: "center",
-    marginBottom: 8,
+    marginBottom: 10,
   },
 
   subtitle: {
-    fontSize: 14,
+    fontSize: 20,
     color: "#eaeaea",
     textAlign: "center",
-    marginBottom: 25,
+    marginBottom: 30,
+    lineHeight: 28,
+    paddingHorizontal: 12,
+  },
+
+  formCard: {
+    backgroundColor: "rgba(255,255,255,0.12)",
+    borderRadius: 20,
+    padding: 20,
+    borderWidth: 1,
+    borderColor: "rgba(255,255,255,0.18)",
+    marginBottom: 20,
+  },
+
+  button: {
+    backgroundColor: "#1E1E2E",
+    paddingVertical: 18,
+    borderRadius: 14,
+    alignItems: "center",
+    marginTop: 10,
   },
 
   buttonText: {
     color: "#fff",
-    fontWeight: "bold",
+    fontWeight: "700",
+    fontSize: 20,
   },
 
   link: {
-    marginTop: 15,
+    marginTop: 10,
     textAlign: "center",
     color: "#fff",
+    fontSize: 16,
+    opacity: 0.85,
   },
 });

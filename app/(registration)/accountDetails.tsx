@@ -1,42 +1,43 @@
 import * as ImagePicker from "expo-image-picker";
-import { LinearGradient } from 'expo-linear-gradient';
+import { LinearGradient } from "expo-linear-gradient";
 import { useRouter } from "expo-router";
-import React, { useState } from 'react';
-import { Image, KeyboardAvoidingView, Platform, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import React, { useState } from "react";
+import {
+  Image,
+  KeyboardAvoidingView,
+  Platform,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { registrationStyles } from "../styles/Registration";
 
-const accountDetails = () => {
-
-  // Navigation hook (used to move between screens)
+const AccountDetails: React.FC = () => {
   const router = useRouter();
 
-  // Stores selected profile image URI (null = no image selected yet)
   const [image, setImage] = useState<string | null>(null);
+  const [displayName, setDisplayName] = useState("");
+  const [username, setUsername] = useState("");
+  const [bio, setBio] = useState("");
 
-  /**
-   * Opens device image library and allows user to pick a profile picture
-   */
   const pickImage = async () => {
-
-    // Request permission to access media library
     const permissionResult =
       await ImagePicker.requestMediaLibraryPermissionsAsync();
 
-    // If permission is denied, stop function
     if (!permissionResult.granted) {
       alert("Permission required to access gallery");
       return;
     }
 
-    // Open image picker
     const result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images, // only images allowed
-      allowsEditing: true, // user can crop image
-      aspect: [1, 1], // square crop (profile picture style)
-      quality: 1, // highest quality
+      mediaTypes: ["images"],
+      allowsEditing: true,
+      aspect: [1, 1],
+      quality: 1,
     });
 
-    // If user did not cancel selection, save image URI
     if (!result.canceled) {
       setImage(result.assets[0].uri);
     }
@@ -44,95 +45,177 @@ const accountDetails = () => {
 
   return (
     <LinearGradient
-      colors={['#020024', '#090979', '#00D4FF']}
-      start={{ x: 0, y: 0 }}
-      end={{ x: 1, y: 1 }}
-      style={registrationStyles.container}
+      colors={["#020024", "#090979", "#00D4FF"]}
+      style={styles.container}
     >
-
-      {/* Prevents keyboard from overlapping inputs */}
       <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        style={registrationStyles.innerContainer}
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={styles.container}
       >
+        <View style={styles.content}>
+          
 
-        {/* Screen title section */}
-        <View style={registrationStyles.titleContainer}>
-          <Text style={registrationStyles.title}>
-            Let's get your account started
+          <Text style={styles.title}>Your Profile</Text>
+
+          <Text style={styles.subtitle}>
+            Add a few details so people can recognize you on Blogger.
           </Text>
+
+          <TouchableOpacity style={styles.imageCard} onPress={pickImage}>
+            <Image
+              source={
+                image
+                  ? { uri: image }
+                  : require("../../assets/images/avatar.png")
+              }
+              style={styles.avatar}
+            />
+
+            <Text style={styles.imageText}>
+              {image ? "Change Profile Picture" : "Choose Profile Picture"}
+            </Text>
+          </TouchableOpacity>
+
+          <View style={styles.formCard}>
+            <Text style={styles.label}>Display Name</Text>
+            <TextInput
+              style={registrationStyles.input}
+              placeholder="Your display name"
+              placeholderTextColor="rgba(255,255,255,0.7)"
+              value={displayName}
+              onChangeText={setDisplayName}
+            />
+
+            <Text style={styles.label}>Username</Text>
+            <TextInput
+              style={registrationStyles.input}
+              placeholder="Choose a username"
+              placeholderTextColor="rgba(255,255,255,0.7)"
+              value={username}
+              onChangeText={setUsername}
+            />
+
+            <Text style={styles.label}>Bio</Text>
+            <TextInput
+              style={registrationStyles.input}
+              placeholder="Tell people about yourself"
+              placeholderTextColor="rgba(255,255,255,0.7)"
+              value={bio}
+              onChangeText={setBio}
+              multiline
+            />
+
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => {
+                if (!displayName || !username) {
+                  alert("Please fill in required fields");
+                  return;
+                }
+                router.push("/home");
+              }}
+            >
+              <Text style={styles.buttonText}>Start Blogging</Text>
+            </TouchableOpacity>
+          </View>
+
+          <TouchableOpacity onPress={() => router.push("/login")}>
+            <Text style={styles.link}>
+              Already have an account? Log in
+            </Text>
+          </TouchableOpacity>
         </View>
-
-        {/* Profile image picker section */}
-        <TouchableOpacity
-          style={registrationStyles.ImageSection}
-          onPress={pickImage}
-        >
-          <Image
-            source={
-              image
-                ? { uri: image } // user selected image
-                : require('../../assets/images/avatar.png') // default avatar
-            }
-            style={registrationStyles.image}
-          />
-
-          {/* Dynamic button text depending on image state */}
-          <Text style={{ fontSize: 18,color:"#ffffff", fontWeight: 'bold' }}>
-            {image ? "Change Profile Picture" : "Choose Profile Picture"}
-          </Text>
-        </TouchableOpacity>
-
-        {/* Display Name input */}
-        <Text style={registrationStyles.text}>Display name</Text>
-        <TextInput
-          style={registrationStyles.input}
-          placeholder="Enter the name that will be displayed"
-          placeholderTextColor="#ffffff"
-          multiline={true}
-        />
-
-        {/* Username input */}
-        <Text style={registrationStyles.text}>Username</Text>
-        <TextInput
-          style={registrationStyles.input}
-          placeholder="Enter your Username"
-          placeholderTextColor="#fffcfc"
-          multiline={true}
-        />
-
-        {/* Bio input */}
-        <Text style={registrationStyles.text}>Bio</Text>
-        <TextInput
-          style={[registrationStyles.input, registrationStyles.bio]}
-          placeholder="Enter your bio"
-          placeholderTextColor="#ffffff"
-          multiline={true}
-        />
-
-        {/* Submit / continue button */}
-        <TouchableOpacity
-          style={registrationStyles.register}
-          onPress={() => router.push("/home")}
-        >
-          <Text style={registrationStyles.registerText}>
-            Start Blogging
-          </Text>
-        </TouchableOpacity>
-
-        {/* Login redirect link */}
-        <TouchableOpacity
-          style={registrationStyles.bottomTextContainer}
-          onPress={() => router.push("/login")}
-        >
-          <Text style={registrationStyles.bottomText}>
-            Already have an account? Log in
-          </Text>
-        </TouchableOpacity>
-
       </KeyboardAvoidingView>
     </LinearGradient>
   );
 };
 
-export default accountDetails;
+export default AccountDetails;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+
+  content: {
+    flex: 1,
+    justifyContent: "center",
+    paddingHorizontal: 24,
+  },
+
+  title: {
+    fontSize: 52,
+    fontWeight: "bold",
+    color: "#fff",
+    textAlign: "center",
+    marginBottom: 10,
+  },
+
+  subtitle: {
+    fontSize: 20,
+    color: "#eaeaea",
+    textAlign: "center",
+    marginBottom: 25,
+    lineHeight: 28,
+    paddingHorizontal: 10,
+  },
+
+  imageCard: {
+    alignItems: "center",
+    marginBottom: 20,
+  },
+
+  avatar: {
+    width: 110,
+    height: 110,
+    borderRadius: 55,
+    marginBottom: 10,
+    borderWidth: 2,
+    borderColor: "rgba(255,255,255,0.4)",
+  },
+
+  imageText: {
+    color: "#fff",
+    fontSize: 16,
+    fontWeight: "600",
+  },
+
+  formCard: {
+    backgroundColor: "rgba(255,255,255,0.12)",
+    borderRadius: 20,
+    padding: 20,
+    borderWidth: 1,
+    borderColor: "rgba(255,255,255,0.18)",
+    marginBottom: 20,
+  },
+
+  label: {
+    color: "#fff",
+    fontSize: 18,
+    fontWeight: "600",
+    marginBottom: 6,
+    marginTop: 10,
+  },
+
+  button: {
+    backgroundColor: "#1E1E2E",
+    paddingVertical: 18,
+    borderRadius: 14,
+    alignItems: "center",
+    marginTop: 15,
+  },
+
+  buttonText: {
+    color: "#fff",
+    fontWeight: "700",
+    fontSize: 20,
+  },
+
+  link: {
+    textAlign: "center",
+    color: "#fff",
+    fontSize: 16,
+    opacity: 0.85,
+    marginTop: 10,
+  },
+});
