@@ -1,6 +1,6 @@
 import { LinearGradient } from "expo-linear-gradient";
 import { useRouter } from "expo-router";
-import React from "react";
+import React, { useState } from "react";
 import {
   KeyboardAvoidingView,
   Platform,
@@ -15,6 +15,34 @@ import { registrationStyles } from "../styles/Registration";
 function LoginPassword() {
   const router = useRouter();
 
+  const [cPassword, setCPassword] = useState("");
+  const [password, setPassword] = useState("");
+
+  const [isCPassword, setIsCPassword] = useState(false);
+  const [isPassword, setIsPassword] = useState(false);
+  const [same, setSame] = useState(false);
+
+  const handleRegister = () => {
+    const checkCPassword = cPassword.trim() === "";
+    const checkPassword = password.trim() === "";
+
+    setIsCPassword(checkCPassword);
+    setIsPassword(checkPassword);
+
+    if (checkCPassword || checkPassword) {
+      setSame(false);
+      return;
+    }
+
+    if (cPassword !== password) {
+      setSame(true);
+      return;
+    }
+
+    setSame(false);
+    router.push("/accountDetails");
+  };
+
   return (
     <LinearGradient
       colors={["#020024", "#090979", "#00D4FF"]}
@@ -25,8 +53,6 @@ function LoginPassword() {
         style={styles.container}
       >
         <View style={styles.content}>
-          
-
           <Text style={styles.title}>Create Your Password</Text>
 
           <Text style={styles.subtitle}>
@@ -35,22 +61,50 @@ function LoginPassword() {
 
           <View style={styles.formCard}>
             <TextInput
-              style={registrationStyles.input}
+              value={password}
+              onChangeText={setPassword}
+              style={[
+                registrationStyles.input,
+                isPassword && {
+                  borderColor: "#8b0a0a",
+                  borderWidth: 2,
+                },
+              ]}
               placeholder="Enter password"
               placeholderTextColor="rgba(255,255,255,0.7)"
               secureTextEntry={true}
             />
 
             <TextInput
-              style={registrationStyles.input}
+              value={cPassword}
+              onChangeText={setCPassword}
+              style={[
+                registrationStyles.input,
+                isCPassword && {
+                  borderColor: "#8b0a0a",
+                  borderWidth: 2,
+                },
+              ]}
               placeholder="Confirm password"
               placeholderTextColor="rgba(255,255,255,0.7)"
               secureTextEntry={true}
             />
 
+            {(isPassword || isCPassword) && (
+              <Text style={styles.errorText}>
+                Please fill in all fields
+              </Text>
+            )}
+
+            {same && (
+              <Text style={styles.errorText}>
+                Passwords do not match
+              </Text>
+            )}
+
             <TouchableOpacity
               style={styles.button}
-              onPress={() => router.push("/accountDetails")}
+              onPress={handleRegister}
             >
               <Text style={styles.buttonText}>Continue</Text>
             </TouchableOpacity>
@@ -71,8 +125,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     paddingHorizontal: 24,
   },
-
-  
 
   title: {
     fontSize: 50,
@@ -97,6 +149,15 @@ const styles = StyleSheet.create({
     padding: 20,
     borderWidth: 1,
     borderColor: "rgba(255,255,255,0.18)",
+  },
+
+  errorText: {
+    color: "#8b0a0a",
+    fontWeight: "bold",
+    fontSize: 18,
+    marginTop: 8,
+    marginBottom: 10,
+    textAlign: "center",
   },
 
   button: {
