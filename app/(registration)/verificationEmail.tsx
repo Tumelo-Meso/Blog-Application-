@@ -1,29 +1,22 @@
-/* This is the first page of the application which 
-welcomes you to the page and allows you to enter your email
-
-*/ 
-
 import { LinearGradient } from "expo-linear-gradient";
 import { useRouter } from "expo-router";
 import React, { useState } from "react";
 import {
-  KeyboardAvoidingView,
-  Platform,
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
+    KeyboardAvoidingView,
+    Platform,
+    StyleSheet,
+    Text,
+    TextInput,
+    TouchableOpacity,
+    View,
 } from "react-native";
 import { registrationStyles } from "../styles/Registration";
 
-export default function Login() {
+export default function verificationEmail() {
   const router = useRouter();
   const [email,setEmail] = useState("");
   const [isemail,isSetEmail] = useState(false);
 
-  
-  //Function used to check whether the correct email has been entered
   const handleRegister = () =>{
     let checkEmail= false;
 
@@ -35,17 +28,13 @@ export default function Login() {
 
     if(checkEmail) return;
 
-     router.push("/(registration)/loginPassword");
+     router.push("/(registration)/forgotPassword");
   }
-  
   return (
-    // Colour of the page
     <LinearGradient
       colors={["#020024", "#090979", "#00D4FF"]}
       style={styles.container}
     >
-
-    //positions the keyboard
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={styles.container}
@@ -53,13 +42,13 @@ export default function Login() {
         <View style={styles.content}>
           
           
-      //Tilte text
-          <Text style={styles.title}>Welcome to Blogger</Text>
-      //subtitle
+
+          <Text style={styles.title}>Verification Email</Text>
+
           <Text style={styles.subtitle}>
-            Share your ideas, connect with others, and start your journey with us.
+            Enter the email connected to the account you lost the password to.
           </Text>
-      //Email Textbox
+
           <View style={styles.formCard}>
             <TextInput
             value={email}
@@ -69,24 +58,24 @@ export default function Login() {
               style={[registrationStyles.input, isemail && { borderColor: "#8b0a0a", borderWidth: 2 }]}
             />
             
-      //Text for incorrect password
+
             {isemail && (
               <Text style ={{color:"#8b0a0a", fontWeight:"bold", fontSize:19,marginTop:2, marginBottom:10}}>
                 Please enter a correct email address
               </Text>
             )}
-        //Register Button
+
             <TouchableOpacity
               style={styles.button}
               onPress={() =>handleRegister()}
             >
-              <Text style={styles.buttonText}>Get Started</Text>
+              <Text style={styles.buttonText}>Next</Text>
             </TouchableOpacity>
           </View>
-        // Already logged in
+
           <TouchableOpacity onPress={() => router.push("/login")}>
             <Text style={styles.link}>
-              Already part of Blogger? Log in
+              Back
             </Text>
           </TouchableOpacity>
 

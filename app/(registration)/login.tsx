@@ -90,7 +90,7 @@ const SignUp = () => {
             </Text>
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={() => router.push("/forgotPassword")}>
+          <TouchableOpacity onPress={() => router.push("/verificationEmail")}>
             <Text style={styles.linkSmall}>Forgot Password?</Text>
           </TouchableOpacity>
         </View>

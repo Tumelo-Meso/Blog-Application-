@@ -1,3 +1,5 @@
+/*This is the page for creating your passwowr
+after the signUp page */
 import { LinearGradient } from "expo-linear-gradient";
 import { useRouter } from "expo-router";
 import React, { useState } from "react";
