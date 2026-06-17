@@ -4,17 +4,17 @@ import { LinearGradient } from "expo-linear-gradient";
 import { useRouter } from "expo-router";
 import React, { useState } from "react";
 import {
-  KeyboardAvoidingView,
-  Platform,
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
+    KeyboardAvoidingView,
+    Platform,
+    StyleSheet,
+    Text,
+    TextInput,
+    TouchableOpacity,
+    View,
 } from "react-native";
 import { registrationStyles } from "../styles/Registration";
 
-function LoginPassword() {
+function signUpPassword() {
   const router = useRouter();
 
   const [cPassword, setCPassword] = useState("");
@@ -23,7 +23,8 @@ function LoginPassword() {
   const [isCPassword, setIsCPassword] = useState(false);
   const [isPassword, setIsPassword] = useState(false);
   const [same, setSame] = useState(false);
-
+  
+//Checks whether the password is correct or not
   const handleRegister = () => {
     const checkCPassword = cPassword.trim() === "";
     const checkPassword = password.trim() === "";
@@ -46,22 +47,27 @@ function LoginPassword() {
   };
 
   return (
+    //Page color
     <LinearGradient
       colors={["#020024", "#090979", "#00D4FF"]}
       style={styles.container}
     >
+        {/*Keyboard view*/}
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={styles.container}
       >
+        {/* Title */}
         <View style={styles.content}>
           <Text style={styles.title}>Create Your Password</Text>
-
+        {/* subTitle */}
           <Text style={styles.subtitle}>
             Choose a secure password to protect your Blogger account.
           </Text>
 
           <View style={styles.formCard}>
+
+            {/* Enter password input */}
             <TextInput
               value={password}
               onChangeText={setPassword}
@@ -76,7 +82,7 @@ function LoginPassword() {
               placeholderTextColor="rgba(255,255,255,0.7)"
               secureTextEntry={true}
             />
-
+            {/* confirm password input */}
             <TextInput
               value={cPassword}
               onChangeText={setCPassword}
@@ -177,4 +183,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LoginPassword;
+export default signUpPassword;

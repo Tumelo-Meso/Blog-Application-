@@ -23,7 +23,7 @@ export default function Login() {
   const [isemail,isSetEmail] = useState(false);
 
   
-  //Function used to check whether the correct email has been entered
+  /*Function used to check whether the correct email has been entered*/
   const handleRegister = () =>{
     let checkEmail= false;
 
@@ -35,17 +35,17 @@ export default function Login() {
 
     if(checkEmail) return;
 
-     router.push("/(registration)/loginPassword");
+     router.push("/(registration)/signUpPassword");
   }
   
   return (
-    // Colour of the page
+    /*Colour of the page*/
     <LinearGradient
       colors={["#020024", "#090979", "#00D4FF"]}
       style={styles.container}
     >
 
-    //positions the keyboard
+    {/*positions the keyboard*/}
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={styles.container}
@@ -53,13 +53,13 @@ export default function Login() {
         <View style={styles.content}>
           
           
-      //Tilte text
+      { /*Title text*/}
           <Text style={styles.title}>Welcome to Blogger</Text>
-      //subtitle
+      {/*subtitle*/}
           <Text style={styles.subtitle}>
             Share your ideas, connect with others, and start your journey with us.
           </Text>
-      //Email Textbox
+      {/*Email Textbox*/}
           <View style={styles.formCard}>
             <TextInput
             value={email}
@@ -69,13 +69,13 @@ export default function Login() {
               style={[registrationStyles.input, isemail && { borderColor: "#8b0a0a", borderWidth: 2 }]}
             />
             
-      //Text for incorrect password
+      {/*Text for incorrect password*/}
             {isemail && (
               <Text style ={{color:"#8b0a0a", fontWeight:"bold", fontSize:19,marginTop:2, marginBottom:10}}>
                 Please enter a correct email address
               </Text>
             )}
-        //Register Button
+        {/*Register Button*/}
             <TouchableOpacity
               style={styles.button}
               onPress={() =>handleRegister()}
@@ -83,7 +83,7 @@ export default function Login() {
               <Text style={styles.buttonText}>Get Started</Text>
             </TouchableOpacity>
           </View>
-        // Already logged in
+        {/*Already logged in*/}
           <TouchableOpacity onPress={() => router.push("/login")}>
             <Text style={styles.link}>
               Already part of Blogger? Log in

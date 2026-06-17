@@ -1,3 +1,6 @@
+/*This is the page where you put in the
+details for your account */
+
 import * as ImagePicker from "expo-image-picker";
 import { LinearGradient } from "expo-linear-gradient";
 import { useRouter } from "expo-router";
